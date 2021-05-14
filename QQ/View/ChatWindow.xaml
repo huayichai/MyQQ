@@ -1,0 +1,125 @@
+﻿<Window x:Class="QQ.View.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QQ.View"
+        mc:Ignorable="d"
+        Title="ChatWindow" Background="#ffffff"
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        Height="556" Width="737">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resourses/Style/ChatDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Border BorderBrush="Gray" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="38"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="1"></RowDefinition>
+                    <RowDefinition Height="160"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center"
+              Source="../Resourses/Images/ChatHeader.png" Stretch="Fill" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown"/>
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{DynamicResource MiniMizeButtonStyle}" Grid.Column="1" Click="MinimizeClick"
+                        Background="{x:Null}" BorderBrush="{x:Null}"
+                        FontFamily="../Resourses/Fonts/#iconfont"
+                        FontSize="25" Foreground="White" Content="&#xe624;"></Button>
+                    <Button Grid.Column="2" Style="{DynamicResource CloseButtonStyle}" Click="CloseWindow_Click"
+                        Background="{x:Null}" BorderBrush="{x:Null}"
+                        FontFamily="../Resourses/Fonts/#iconfont"
+                        FontSize="25" Foreground="White" Content="&#xe6c9;"></Button>
+                </Grid>
+                <TextBlock Text="{Binding Friend.name}" FontSize="18" Foreground="#ffffff"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <Border Grid.Row="1">
+                    <ListBox x:Name="MessageListBox" ItemsSource="{Binding MessageList}" HorizontalAlignment="Stretch"
+                             ScrollViewer.CanContentScroll="False" BorderBrush="White">
+                        <ListBox.ItemTemplateSelector>
+                            <local:ChatMessageDataTemplateSelector LeftMessageTemplate="{StaticResource LeftMessageTemplate}"
+                                                RightMessageTemplate="{StaticResource RightMessageTemplate}">
+                            </local:ChatMessageDataTemplateSelector>
+                        </ListBox.ItemTemplateSelector>
+                        <ListBox.ItemContainerStyle>
+                            <!--grid的宽度却是随着文本的宽度的变化而变化 -->
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                             TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </Border>
+                <GridSplitter Grid.Row="2" Height="1" HorizontalAlignment="Stretch" BorderBrush="#ebebeb"></GridSplitter>
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{DynamicResource FuncButtonStyle}" Grid.Column="0" Content="&#xebf1;" ></Button>
+                        <Button Grid.Column="1" Style="{DynamicResource FuncButtonStyle}" Content="&#xe61d;"></Button>
+                        <Button Grid.Column="2" Style="{DynamicResource FuncButtonStyle}" Content="&#xe621;"></Button>
+                        <Button Style="{DynamicResource FuncButtonStyle}" Grid.Column="3" Content="&#xe68f;"></Button>
+                        <Button Style="{DynamicResource FuncButtonStyle}" Grid.Column="4" Content="&#xe617;"></Button>
+                        <Button Style="{DynamicResource FuncButtonStyle}" Grid.Column="5" Content="&#xe695;"></Button>
+                        <Button Style="{DynamicResource FuncButtonStyle}" FontSize="25" Grid.Column="6" Content="&#xe6ce;" VerticalAlignment="Top"></Button>
+                        <Button Style="{DynamicResource FuncButtonStyle}" FontSize="25" Grid.Column="7" Content="&#xe710;" VerticalAlignment="Top"></Button>
+                        <Button Grid.Column="9" Style="{DynamicResource FuncButtonStyle}" Content="&#xe6f4;"></Button>
+                        <Button Grid.Column="10" Style="{DynamicResource FuncButtonStyle}" Content="&#xe696;"></Button>
+                    </Grid>
+                    <TextBox Grid.Row="1" Text="{Binding SendContent}" BorderBrush="{x:Null}" TextWrapping="Wrap"
+                             BorderThickness="0"></TextBox>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{DynamicResource CloseButtonStyle2}" Grid.Column="1"
+                                Width="70" Height="28" Content="关闭" HorizontalAlignment="Right"
+                                Click="CloseWindow_Click"></Button>
+                        <Button Style="{DynamicResource SendButtonStyle}" Grid.Column="2" Foreground="#ffffff"
+                                Width="70" Height="28" Content="发送"
+                                Click="SendClick"></Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

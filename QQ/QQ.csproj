@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>QQ_128px_1230490_easyicon.net.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resourses\Fonts\iconfont.ttf" />
+    <None Remove="Resourses\Images\afternoon.jpg" />
+    <None Remove="Resourses\Images\back.gif" />
+    <None Remove="Resourses\Images\ChatHeader.png" />
+    <None Remove="Resourses\Images\checkbox_tick_highlight1.png" />
+    <None Remove="Resourses\Images\checkbox_tick_normal1.png" />
+    <None Remove="Resourses\Images\checkbox_tick_pushed1.png" />
+    <None Remove="Resourses\Images\corner_right_hover.png" />
+    <None Remove="Resourses\Images\corner_right_normal_breath.png" />
+    <None Remove="Resourses\Images\corner_right_normal_down.png" />
+    <None Remove="Resourses\Images\FriendHead.png" />
+    <None Remove="Resourses\Images\head.jpg" />
+    <None Remove="Resourses\Images\logo-banner.png" />
+    <None Remove="Resourses\Images\User1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="WebSocket4Net" Version="0.15.2" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resourses\Fonts\iconfont.ttf" />
+    <Resource Include="Resourses\Images\afternoon.jpg" />
+    <Resource Include="Resourses\Images\back.gif" />
+    <Resource Include="Resourses\Images\ChatHeader.png" />
+    <Resource Include="Resourses\Images\checkbox_tick_highlight1.png" />
+    <Resource Include="Resourses\Images\checkbox_tick_normal1.png" />
+    <Resource Include="Resourses\Images\checkbox_tick_pushed1.png" />
+    <Resource Include="Resourses\Images\corner_right_hover.png" />
+    <Resource Include="Resourses\Images\corner_right_normal_breath.png" />
+    <Resource Include="Resourses\Images\corner_right_normal_down.png" />
+    <Resource Include="Resourses\Images\FriendHead.png" />
+    <Resource Include="Resourses\Images\head.jpg" />
+    <Resource Include="Resourses\Images\logo-banner.png" />
+    <Resource Include="Resourses\Images\User1.jpg" />
+  </ItemGroup>
+
+</Project>

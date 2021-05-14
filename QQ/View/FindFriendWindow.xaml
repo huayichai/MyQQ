@@ -1,0 +1,109 @@
+﻿<Window x:Class="QQ.View.FindFriendWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QQ.View"
+        mc:Ignorable="d"
+        Title="查找" Background="#ffffff"
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        Height="600" Width="300">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resourses/Style/FindFriendDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Border BorderBrush="Gray" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="38"></RowDefinition>
+                    <RowDefinition Height="38"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="1"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Background="#009bdb" MouseLeftButtonDown="DragWindow_MouseLeftButtonDown"></Border>
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="&#xe611;" FontFamily="../Resourses/Fonts/#iconfont" Foreground="#fcfefe"></TextBlock>
+                    <TextBlock Grid.Column="1" Text="查找" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="12" Foreground="#fcfefe"></TextBlock>
+                    <Button Style="{DynamicResource MiniMizeButtonStyle}" Grid.Column="3" Click="MinimizeClick"
+                        Background="{x:Null}" BorderBrush="{x:Null}"
+                        FontFamily="../Resourses/Fonts/#iconfont"
+                        FontSize="25" Foreground="White" Content="&#xe624;"></Button>
+                    <Button Grid.Column="4" Style="{DynamicResource CloseButtonStyle}" Click="CloseWindow_Click"
+                        Background="{x:Null}" BorderBrush="{x:Null}"
+                        FontFamily="../Resourses/Fonts/#iconfont"
+                        FontSize="25" Foreground="White" Content="&#xe6c9;"></Button>
+                </Grid>
+
+                <Border Grid.Row="1" Background="#ebf2f9" BorderBrush="#cacaca" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding SearchText}" Margin="5" VerticalAlignment="Center" Foreground="#000000"
+                                 VerticalContentAlignment="Center" FontSize="14" Height="26"></TextBox>
+                        <Button Style="{DynamicResource SearchButtonStyle}" Grid.Column="1" Margin="5" 
+                                Content="查找" Foreground="#ffffff" FontSize="12" Click="SearchFriendClick"></Button>
+                    </Grid>
+                </Border>
+
+                <ListBox Grid.Row="2" x:Name="SearchResultListBox" BorderThickness="1" ItemContainerStyle="{StaticResource UserInfoStyle}"
+                         BorderBrush="#eaeaeb" Background="Transparent" ItemsSource="{Binding SerachResultList}"
+                         >
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBox">
+                                        <Border x:Name="Bd"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0">
+                                            <ScrollViewer Focusable="False">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.Style>
+                </ListBox>
+
+                <GridSplitter Grid.Row="3" Height="1" HorizontalAlignment="Stretch" BorderBrush="#ebebeb"></GridSplitter>
+                
+                <ListBox Grid.Row="4" x:Name="AddFriendRequestListBox" BorderThickness="1" ItemContainerStyle="{StaticResource AddFriendRequestStyle}"
+                         BorderBrush="#eaeaeb" Background="Transparent" ItemsSource="{Binding RequestList}">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBox">
+                                        <Border x:Name="Bd"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="0">
+                                            <ScrollViewer Focusable="False">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.Style>
+                </ListBox>
+
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
