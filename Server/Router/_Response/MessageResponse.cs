@@ -1,4 +1,5 @@
-﻿using Server.Router._Request;
+﻿using MySql.Data.MySqlClient;
+using Server.Router._Request;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,15 @@ namespace Server.Router._Response
             to = message.to;
             content = message.content;
             time = message.time;
+        }
+
+        public MessageResponse(MySqlDataReader reader)
+        {
+            type = "message";
+            from = reader.GetString("from");
+            to = reader.GetString("to");
+            content = reader.GetString("content");
+            time = reader.GetDateTime("time");
         }
     }
 }

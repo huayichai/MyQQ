@@ -58,6 +58,11 @@ namespace Server.Controller
             {
                 return SearchHandler(message);
             }
+            else if (type.Equals("unreadMessage"))
+            {
+                UnreadMessageHandler(message);
+                return null;
+            }
             else
             {
                 return ReturnErrorStatus(type + " 事件未注册");
@@ -213,6 +218,19 @@ namespace Server.Controller
             catch (Exception)
             {
                 return new SearchResponse(true);
+            }
+        }
+
+        private static void UnreadMessageHandler(string message)
+        {
+            try
+            {
+                UnreadMessageRequest request = (UnreadMessageRequest)JsonConvert.DeserializeObject(message, typeof(UnreadMessageRequest));
+                MessageController.ForwardUnreadMessage(request);
+            }
+            catch (Exception)
+            {
+                return;
             }
         }
     }

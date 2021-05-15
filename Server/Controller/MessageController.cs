@@ -1,4 +1,5 @@
-﻿using Server.Entity;
+﻿using Server.DAO;
+using Server.Entity;
 using Server.Router._Request;
 using Server.Router._Response;
 using System;
@@ -19,10 +20,37 @@ namespace Server.Controller
                     toUser = CenterController.clientMap[messageRequest.to];
                     toUser.socket.Send(new MessageResponse(messageRequest).ToString());
                 }
+                else // 离线情况
+                {
+                    MessageDAO.InsertUnreadMessage(messageRequest);
+                }
+                MessageDAO.InsertMessage(messageRequest);
                 return true;
             } catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public static void ForwardUnreadMessage(UnreadMessageRequest request)
+        {
+            try
+            {
+                Client toUser = null;
+                if (CenterController.clientMap.ContainsKey(request.receiveAccount)) // 在线情况
+                {
+                    toUser = CenterController.clientMap[request.receiveAccount];
+                    List<MessageResponse> messages = MessageDAO.SelectUnreadMessageByAccount(request.sendAccount, request.receiveAccount);
+                    foreach (MessageResponse message in messages)
+                    {
+                        toUser.socket.Send(message.ToString());
+                        MessageDAO.DeleteUnreadMessageByAccount(request.sendAccount, request.receiveAccount);
+                    }                    
+                }
+
+            } catch (Exception e)
+            {
+
             }
         }
     }

@@ -226,5 +226,11 @@ namespace QQ.Controller
                 Global.findFriendWindow.AddFriendRequestListBox.Items.Refresh();
             });
         }
+
+        public static void SendUnreadMessageRequest(string sendAccount)
+        {
+            UnreadMessageRequest request = new UnreadMessageRequest(sendAccount, Global.user.account);
+            Global.Client.socket.Send(request.ToString());
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using QQ.Entity;
+﻿using QQ.Controller;
+using QQ.Entity;
 using QQ.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace QQ.View
             InitializeComponent();
             InitViewModel(friend);
             DataContext = ViewModel;
+            CenterController.SendUnreadMessageRequest(friend.account);
         }
 
         public ChatViewModel ViewModel { get; set; }
