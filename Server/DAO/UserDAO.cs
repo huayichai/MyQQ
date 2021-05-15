@@ -69,6 +69,27 @@ namespace Server.DAO
                 }
             }
         }
+
+        public static bool InsertFriend(string account1, string account2)
+        {
+            using (MySqlConnection msc = new MySqlConnection(constring))
+            {
+                string sql = "insert into friend (userAccount, friendAccount) values (@account1, @account2)";
+                MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("account1", account1);
+                cmd.Parameters.AddWithValue("account2", account2);
+                msc.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
     
     }
 }

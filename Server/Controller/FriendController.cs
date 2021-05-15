@@ -48,6 +48,8 @@ namespace Server.Controller
                 Client client = CenterController.clientMap[response.friendAccount];
                 client.socket.Send(response.ToString());
             }
+            UserDAO.InsertFriend(response.userAccount, response.friendAccount);
+            UserDAO.InsertFriend(response.friendAccount, response.userAccount);
         }
     }
 }
