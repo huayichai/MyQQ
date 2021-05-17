@@ -11,6 +11,8 @@ namespace QQ.Router._Response
 
         public string to { get; set; }
 
+        public string fromName { get; set; }
+
         public string content { get; set; }
 
         public DateTime time { get; set; }

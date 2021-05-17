@@ -1,5 +1,6 @@
 ﻿using QQ.Controller;
 using QQ.Entity;
+using QQ.Router._Request;
 using QQ.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace QQ.View
         public ChatWindow(Friend friend)
         {
             InitializeComponent();
+            this.friend = friend;
             InitViewModel(friend);
             DataContext = ViewModel;
             CenterController.SendUnreadMessageRequest(friend.account);
@@ -30,6 +32,9 @@ namespace QQ.View
 
         public ChatViewModel ViewModel { get; set; }
 
+        public HistoryWindow history { get; set; }
+
+        public Friend friend { get; set; }
 
         /// <summary>
         /// 避免重复初始化
@@ -72,6 +77,13 @@ namespace QQ.View
             ViewModel.SendMessage();
             MessageListBox.Items.Refresh();
             MessageListBox.ScrollIntoView(ViewModel.MessageList[ViewModel.MessageList.Count - 1]);
+        }
+
+        private void HistoryClick(object sender, RoutedEventArgs e)
+        {
+            history = new HistoryWindow();
+            CenterController.SendHistoryRequest(Global.user.account, friend.account);
+            history.Show();
         }
     }
 

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QQ.View"
         mc:Ignorable="d"
-        Title="LoginWindow" Width="472" Height="372" Background="Transparent"
+        Title="登录" Width="472" Height="372" Background="Transparent"
         Foreground="White" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>

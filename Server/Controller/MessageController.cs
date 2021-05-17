@@ -53,5 +53,25 @@ namespace Server.Controller
 
             }
         }
+    
+        public static void GetHistoryMessage(HistoryRequest request)
+        {
+            try
+            {
+                Client toUser = null;
+                if (CenterController.clientMap.ContainsKey(request.from)) // 在线情况
+                {
+                    toUser = CenterController.clientMap[request.from];
+                    List<HistoryResponse> messages = MessageDAO.SelectHistoryMessage(request.from, request.to);
+                    if (messages != null)
+                    {
+                        foreach (HistoryResponse message in messages)
+                        {
+                            toUser.socket.Send(message.ToString());
+                        }
+                    }
+                }
+            } catch(Exception) { }
+        }
     }
 }

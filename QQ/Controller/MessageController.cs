@@ -58,5 +58,29 @@ namespace QQ.Controller
                 return false;
             }
         }
+
+
+        public static bool ReceiveHistoryMessage(HistoryResponse response)
+        {
+            try
+            {
+                ChatWindow chat = Global.ChatWindowMap[response.toAccount];
+                TextMessage message = new TextMessage();
+                message.userName = response.name;
+                message.isMy = response.isMy;
+                message.time = response.time.ToString("G");
+                message.content = response.content;
+                chat.history.ViewModel.HistoryMessageList.Add(message);
+                chat.history.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    chat.history.HistoryMessageListBox.Items.Refresh();
+                });
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

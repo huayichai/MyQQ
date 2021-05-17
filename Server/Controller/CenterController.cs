@@ -63,6 +63,11 @@ namespace Server.Controller
                 UnreadMessageHandler(message);
                 return null;
             }
+            else if (type.Equals("history"))
+            {
+                HistoryHandler(message);
+                return null;
+            }
             else
             {
                 return ReturnErrorStatus(type + " 事件未注册");
@@ -232,6 +237,16 @@ namespace Server.Controller
             {
                 return;
             }
+        }
+
+        private static void HistoryHandler(string message)
+        {
+            try
+            {
+                HistoryRequest request = (HistoryRequest)JsonConvert.DeserializeObject(message, typeof(HistoryRequest));
+                MessageController.GetHistoryMessage(request);               
+            }
+            catch (Exception) { }
         }
     }
 }

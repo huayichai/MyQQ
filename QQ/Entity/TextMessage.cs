@@ -6,10 +6,11 @@ namespace QQ.Entity
 {
     public class TextMessage : MessageBase
     {
+        public TextMessage() { }
         public TextMessage(string con, DateTime time, bool isMy)
         {
             _content = con;
-            sendTime = time;
+            SendTime = time;
             this.isMy = isMy;
             width = content.Length > 20 ? 300 : content.Length * 14 + 20;
         }

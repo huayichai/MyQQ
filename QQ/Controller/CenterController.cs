@@ -61,6 +61,10 @@ namespace QQ.Controller
                 SearchFriendHandler(message);
                 return false;
             }
+            else if (type.Equals("history"))
+            {
+                return HistoryHandler(message);
+            }
             else
             {
                 return false;
@@ -180,6 +184,22 @@ namespace QQ.Controller
             }
         }
 
+        private static bool HistoryHandler(string message)
+        {
+            try
+            {
+                HistoryResponse res = (HistoryResponse)JsonConvert.DeserializeObject(message, typeof(HistoryResponse));
+                MessageController.ReceiveHistoryMessage(res);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+
 
         public static void SendLoginMessage(string account, string password)
         {
@@ -230,6 +250,19 @@ namespace QQ.Controller
         public static void SendUnreadMessageRequest(string sendAccount)
         {
             UnreadMessageRequest request = new UnreadMessageRequest(sendAccount, Global.user.account);
+            Global.Client.socket.Send(request.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fromAccount">请求谁的历史记录</param>
+        /// <param name="toUser">和谁的历史记录</param>
+        public static void SendHistoryRequest(string fromAccount, string toUser)
+        {
+            HistoryRequest request = new HistoryRequest();
+            request.from = fromAccount;
+            request.to = toUser;
             Global.Client.socket.Send(request.ToString());
         }
     }
