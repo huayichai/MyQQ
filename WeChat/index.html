@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-1.11.0.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/WeChat.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+    <style type="text/css"></style>
+</head>
+
+<body>
+    <!--登录界面-->
+    <div class="mybox">
+        <div class="loginBox">
+            <div class="LoginTitle">
+                <P style="font-size: 22px;">登录</P>
+            </div>
+            <div class="AccountInputBox">
+                <div class="iconBox">
+                    <span class="iconfont myicon">&#xe611;</span>
+                </div>
+                <input ID="account" class="AInputBox" type="text" placeholder="账号">
+            </div>
+            <div class="PasswordInputBox">
+                <div class="iconBox">
+                    <span class="iconfont myicon">&#xe64a;</span>
+                </div>
+                <input ID="password" class="PInputBox" type="password" placeholder="密码">
+            </div>
+            <div class="func">
+                <div class="func_left">
+                    <input type="checkbox" />记住账号
+                </div>
+                <div class="func_right">
+                    <span>无法登录</span>
+                </div>
+            </div>
+            <div>
+                <button class="loginButton">登录</button>
+            </div>
+        </div>
+    </div>
+
+    <!--聊天界面-->
+    <div class="box" style="display: none;">
+        <div class="wechat">
+            <!--左侧-->
+            <div id="leftlist">
+                <!--左侧头像部分-->
+                <div id="leftlist_title">
+                    <span><img id="leftlist_title_touxiang" src="img/webwxgeticon (2).jpg" /></span>
+                    <span id="leftlist_title_name">Brilliant</span>
+                    <img id="leftlist_title_xiala" src="img/下拉栏.png" />
+                </div>
+                <!--左侧搜索框部分-->
+                <div id="leftlist_select"><img src="img/搜索.png" /><input type="text" placeholder="搜索"></div>
+                <!--左侧功能栏部分-->
+                <div id="leftlist_list1" class="cle">
+                    <p id="leftlist_list1_liaotian" class="0">
+                        <img src="img/图标/聊天绿.png" style="display: none;" />
+                        <img src="img/图标/聊天白.png" />
+                    </p>
+                    <p id="leftlist_list1_zhong" class="1">
+                        <img src="img/图标/中绿.png" style="display: none;" />
+                        <img src="img/图标/中白.png" />
+                    </p>
+                    <p id="leftlist_list1_you" class="2">
+                        <img src="img/图标/右绿.png" />
+                        <img src="img/图标/右白.png" style="display: none;" />
+                    </p>
+                </div>
+                <!--左侧用户列表部分-->
+                <div id="leftlist_list2" class="cle">
+                    <!-- <div id="gundongttiao">
+                        <div id="gun"></div>
+                    </div>
+                    <div id="gundongttiao1">
+                        <div id="gun1"></div>
+                    </div> -->
+                    <ul id="leftlist_list2_ul1" style="display: none;"></ul>
+                    <ul id="leftlist_list2_ul2" style="display: none;"></ul>
+                    <ul id="leftlist_list2_ul3"></ul>
+                </div>
+            </div>
+            <!--右侧-->
+            <div id="right">
+                <div id="right_title">
+                </div>
+                <div id="right_main">
+                    <div id="right_main_1">
+
+                    </div>
+                    <div id="right_main_2">
+
+                    </div>
+                    <div id="right_main_3"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script src="js/WeChat.js" type="text/javascript"></script>
+
+</html>

@@ -1,0 +1,133 @@
+body {
+    background-size: 100% 100%;
+    height: 100vh;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.mybox {
+    background-image: url("../img/bg.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBox {
+    width: 400px;
+    height: 300px;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 30px 50px;
+}
+
+.AccountInputBox {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    border: 1px #a3a3a3 solid;
+    border-bottom: 0;
+    font-size: 15px;
+    color: #a3a3a3;
+    overflow: hidden;
+}
+
+.PasswordInputBox {
+    width: 100%;
+    height: 40px;
+    border: 1px #a3a3a3 solid;
+    font-size: 15px;
+    color: #a3a3a3;
+    overflow: hidden;
+}
+
+.AInputBox {
+    width: 90%;
+    height: 40px;
+    float: left;
+    border: 0;
+}
+
+.AInputBox:focus {
+    outline: none;
+}
+
+.PInputBox {
+    width: 90%;
+    height: 40px;
+    float: left;
+    border: 0;
+}
+
+.PInputBox:focus {
+    outline: none;
+}
+
+.loginButton {
+    background-color: #44b549;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    border: 0;
+    height: 30px;
+    width: 80px;
+    margin-top: 20px;
+}
+
+.loginButton:hover {
+    background-color: #329237;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    border: 0;
+    height: 30px;
+    width: 80px;
+    margin-top: 20px;
+}
+
+.func {
+    overflow: hidden;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.func_left {
+    float: left;
+}
+
+.func_right {
+    float: right;
+    color: #4a9afd;
+}
+
+.func_right span :hover {
+    color: #1a74e2;
+}
+
+.iconBox {
+    float: left;
+    width: 30px;
+    height: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.myicon {
+    font-size: 25px;
+    text-align: center;
+    width: 25px;
+    height: 100%;
+}
