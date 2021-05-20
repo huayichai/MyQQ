@@ -7,8 +7,10 @@ namespace QQ.Entity
     public class TextMessage : MessageBase
     {
         public TextMessage() { }
-        public TextMessage(string con, DateTime time, bool isMy)
+        public TextMessage(string name, string header, string con, DateTime time, bool isMy)
         {
+            this.name = name;
+            this.header = header;
             _content = con;
             SendTime = time;
             this.isMy = isMy;

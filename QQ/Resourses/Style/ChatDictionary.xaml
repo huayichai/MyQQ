@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border Background="Orange" Width="25" Height="25" CornerRadius="4" HorizontalAlignment="Left" Margin="0 0 0 0">
-                <TextBlock Text="{Binding Friend.header}" FontSize="18" Foreground="White" TextWrapping="Wrap"
+                <TextBlock Text="{Binding header}" FontSize="18" Foreground="White" TextWrapping="Wrap"
                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
             <Grid HorizontalAlignment="Left" Grid.Column="1"  Background="Transparent" VerticalAlignment="Center">
@@ -48,7 +48,7 @@
                 <ColumnDefinition Width="32"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="1" Background="Orange" Width="25" Height="25" CornerRadius="4" HorizontalAlignment="Right" Margin="0 0 0 0">
-                <TextBlock Text="柴" FontSize="18" Foreground="White" TextWrapping="Wrap"
+                <TextBlock Text="{Binding header}" FontSize="18" Foreground="White" TextWrapping="Wrap"
                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
             <Grid HorizontalAlignment="Left" Grid.Column="0"  Background="Transparent" VerticalAlignment="Center">

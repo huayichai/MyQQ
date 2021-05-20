@@ -21,7 +21,7 @@ namespace QQ.Controller
                 if (Global.ChatWindowMap.ContainsKey(response.from))
                 {
                     ChatWindow chat = Global.ChatWindowMap[response.from];
-                    chat.ViewModel.MessageList.Add(new TextMessage(response.content, response.time, false));
+                    chat.ViewModel.MessageList.Add(new TextMessage(response.name, response.header, response.content, response.time, false));
                     chat.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
                         chat.MessageListBox.Items.Refresh();
@@ -34,7 +34,7 @@ namespace QQ.Controller
                     Global.friendWindow.Dispatcher.Invoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
                         ChatWindow chat = new ChatWindow(friend);
-                        chat.ViewModel.MessageList.Add(new TextMessage(response.content, response.time, false));
+                        chat.ViewModel.MessageList.Add(new TextMessage(response.name, response.header, response.content, response.time, false));
                         Global.ChatWindowMap.Add(friend.account, chat);
                     });                   
                 }
@@ -66,7 +66,7 @@ namespace QQ.Controller
             {
                 ChatWindow chat = Global.ChatWindowMap[response.toAccount];
                 TextMessage message = new TextMessage();
-                message.userName = response.name;
+                message.name = response.name;
                 message.isMy = response.isMy;
                 message.time = response.time.ToString("G");
                 message.content = response.content;

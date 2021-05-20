@@ -90,6 +90,69 @@ namespace Server.DAO
                 }
             }
         }
+
+        public static List<Friend> SelectGroup(string userAccount)
+        {
+            using (MySqlConnection msc = new MySqlConnection(constring))
+            {
+                string sql = "select *" +
+                    "from group_friend,group_chat" +
+                    " where group_friend.userAccount=@userAccount and group_chat.groupID=group_friend.groupID";
+                MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("userAccount", userAccount);
+                msc.Open();
+                try
+                {
+                    List<Friend> friends = new List<Friend>();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Friend friend = new Friend();
+                        friend.account = reader.GetString("groupID");
+                        friend.name = reader.GetString("name");
+                        friend.header = "群";
+                        friend.introduction = reader.GetString("introduction");
+                        friends.Add(friend);
+                    }
+                    return friends;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
     
+        public static List<Friend> SelectGroupFriend(string groupID)
+        {
+            using (MySqlConnection msc = new MySqlConnection(constring))
+            {
+                string sql = "select *" +
+                    "from group_friend,user" +
+                    " where group_friend.groupID=@groupID and group_friend.userAccount=user.account";
+                MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("groupID", groupID);
+                msc.Open();
+                try
+                {
+                    List<Friend> friends = new List<Friend>();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Friend friend = new Friend();
+                        friend.account = reader.GetString("account");
+                        friend.name = reader.GetString("name");
+                        friend.header = reader.GetString("header");
+                        friend.introduction = reader.GetString("introduction");
+                        friends.Add(friend);
+                    }
+                    return friends;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

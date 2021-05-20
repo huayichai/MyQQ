@@ -12,7 +12,9 @@ namespace Server.Controller
     {
         public static List<Friend> GetAllFriends(string account)
         {
-            return UserDAO.SelectFriends(account);
+            List<Friend> friends = UserDAO.SelectFriends(account);
+            friends.AddRange(UserDAO.SelectGroup(account));
+            return friends;
         }
 
         public static Friend SearchFriend(string account)

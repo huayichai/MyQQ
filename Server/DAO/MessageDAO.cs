@@ -10,16 +10,17 @@ namespace Server.DAO
     class MessageDAO : BaseDAO
     {
 
-        public static bool InsertUnreadMessage(MessageRequest request)
+        public static bool InsertUnreadMessage(MessageRequest request, string realAccount)
         {
             using (MySqlConnection msc = new MySqlConnection(constring))
             {
-                string sql = "insert into unread_message (`from`,`to`,`content`,`time`) values (@from,@to,@content,@time)";
+                string sql = "insert into unread_message (`from`,`to`,`content`,`time`,`realAccount`) values (@from,@to,@content,@time,@realAccount)";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
                 cmd.Parameters.AddWithValue("from", request.from);
                 cmd.Parameters.AddWithValue("to", request.to);
                 cmd.Parameters.AddWithValue("content", request.content);
                 cmd.Parameters.AddWithValue("time", request.time);
+                cmd.Parameters.AddWithValue("realAccount", realAccount);
                 msc.Open();
                 try
                 {
@@ -33,16 +34,17 @@ namespace Server.DAO
             }
         }
 
-        public static bool InsertMessage(MessageRequest request)
+        public static bool InsertMessage(MessageRequest request, string realAccount)
         {
             using (MySqlConnection msc = new MySqlConnection(constring))
             {
-                string sql = "insert into message (`from`,`to`,`content`,`time`) values (@from,@to,@content,@time)";
+                string sql = "insert into message (`from`,`to`,`content`,`time`,`realAccount`) values (@from,@to,@content,@time,@realAccount)";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
                 cmd.Parameters.AddWithValue("from", request.from);
                 cmd.Parameters.AddWithValue("to", request.to);
                 cmd.Parameters.AddWithValue("content", request.content);
                 cmd.Parameters.AddWithValue("time", request.time);
+                cmd.Parameters.AddWithValue("realAccount", realAccount);
                 msc.Open();
                 try
                 {
@@ -61,8 +63,8 @@ namespace Server.DAO
             using (MySqlConnection msc = new MySqlConnection(constring))
             {
                 string sql = "select *" +
-                    "from unread_message" +
-                    " where `to`=@receive and `from`=@send";
+                    "from unread_message,user" +
+                    " where `to`=@receive and `from`=@send and user.`account`=unread_message.`realAccount`";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
                 cmd.Parameters.AddWithValue("send", sendAccount);
                 cmd.Parameters.AddWithValue("receive", receiveAccount);
@@ -110,7 +112,7 @@ namespace Server.DAO
             {
                 string sql = "select message.from,message.time,message.content,user.name " +
                     "from message,user" +
-                    " where ((message.`to`=@to1 and message.`from`=@from1) or (message.`to`=@to2 and message.`from`=@from2)) and (message.`from`=user.`account`)";
+                    " where ((message.`to`=@to1 and message.`from`=@from1) or (message.`to`=@to2 and message.`from`=@from2)) and (message.`realAccount`=user.`account`)";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
                 cmd.Parameters.AddWithValue("to1", fromAccount);
                 cmd.Parameters.AddWithValue("from1", toAccount);

@@ -63,7 +63,7 @@ namespace QQ.ViewModel
         public void SendMessage()
         {           
             CenterController.SendMessage(Global.user.account, friend.account, SendContent);
-            TextMessage textMessage = new TextMessage(SendContent, DateTime.Now, true);
+            TextMessage textMessage = new TextMessage(Global.user.account,Global.user.header ,SendContent, DateTime.Now, true);
             messageList.Add(textMessage);
             SendContent = "";
         }

@@ -14,17 +14,55 @@ namespace Server.Controller
         {
             try
             {
-                Client toUser = null;
-                if (CenterController.clientMap.ContainsKey(messageRequest.to)) // 在线情况
+                // 转发单人消息
+                if (messageRequest.to[0]!='-')
                 {
-                    toUser = CenterController.clientMap[messageRequest.to];
-                    toUser.socket.Send(new MessageResponse(messageRequest).ToString());
+                    User user = UserDAO.SelectUserByAccount(messageRequest.from);
+                    Client toUser = null;
+                    if (CenterController.clientMap.ContainsKey(messageRequest.to)) // 在线情况
+                    {
+                        toUser = CenterController.clientMap[messageRequest.to];
+                        MessageResponse res = new MessageResponse(messageRequest);
+                        res.name = user.name;
+                        res.header = user.header;
+                        toUser.socket.Send(res.ToString());
+                    }
+                    else // 离线情况
+                    {
+                        MessageDAO.InsertUnreadMessage(messageRequest, messageRequest.from);
+                    }
+                    MessageDAO.InsertMessage(messageRequest, messageRequest.from);
                 }
-                else // 离线情况
+                else // 群聊消息
                 {
-                    MessageDAO.InsertUnreadMessage(messageRequest);
+                    List<Friend> group_friend = UserDAO.SelectGroupFriend(messageRequest.to);
+                    User user = UserDAO.SelectUserByAccount(messageRequest.from);
+                    foreach(Friend f in group_friend)
+                    {
+                        if (!f.account.Equals(messageRequest.from))
+                        {
+                            Client toUser = null;
+                            MessageRequest request = new MessageRequest();
+                            request.from = messageRequest.to;
+                            request.to = f.account;
+                            request.content = messageRequest.content;
+                            request.time = messageRequest.time;
+                            if (CenterController.clientMap.ContainsKey(f.account)) // 在线情况
+                            {
+                                toUser = CenterController.clientMap[f.account];
+                                MessageResponse res = new MessageResponse(request);
+                                res.name = user.name;
+                                res.header = user.header;
+                                toUser.socket.Send(res.ToString());
+                            }
+                            else // 离线情况
+                            {
+                                MessageDAO.InsertUnreadMessage(request, messageRequest.from);
+                            }
+                            MessageDAO.InsertMessage(request, messageRequest.from);
+                        }                       
+                    }
                 }
-                MessageDAO.InsertMessage(messageRequest);
                 return true;
             } catch (Exception)
             {

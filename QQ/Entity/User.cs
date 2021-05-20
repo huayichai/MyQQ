@@ -12,6 +12,8 @@ namespace QQ.Entity
 
         public string name { get; set; }
 
+        public string header { get; set; }
+
         public string introduction { get; set; }
     }
 }

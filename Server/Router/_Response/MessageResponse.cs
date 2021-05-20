@@ -13,7 +13,9 @@ namespace Server.Router._Response
 
         public string to { get; set; }
 
-        public string fromName { get; set; }
+        public string name { get; set; }
+
+        public string header { get; set; }
 
         public string content { get; set; }
 
@@ -35,6 +37,8 @@ namespace Server.Router._Response
             to = reader.GetString("to");
             content = reader.GetString("content");
             time = reader.GetDateTime("time");
+            name = reader.GetString("name");
+            header = reader.GetString("header");
         }
     }
 }

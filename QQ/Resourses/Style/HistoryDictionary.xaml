@@ -100,7 +100,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding userName}" FontSize="14" Foreground="#008040"></TextBlock>
+                <TextBlock Text="{Binding name}" FontSize="14" Foreground="#008040"></TextBlock>
                 <TextBlock Margin="5,0,0,0" Text="{Binding sendTime}" FontSize="14" Foreground="#008040"></TextBlock>
             </StackPanel>
             <Border Margin="12,0,0,0" Grid.Row="1">
@@ -118,7 +118,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding userName}" FontSize="14" Foreground="#005fff"></TextBlock>
+                <TextBlock Text="{Binding name}" FontSize="14" Foreground="#005fff"></TextBlock>
                 <TextBlock Margin="5,0,0,0" Text="{Binding sendTime}" FontSize="14" Foreground="#005fff"></TextBlock>
             </StackPanel>
             <Border Margin="12,0,0,0" Grid.Row="1">
