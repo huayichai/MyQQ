@@ -35,7 +35,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="删除" Width="60" Height="25" Background="White" Foreground="Black"
                                         CommandParameter="{Binding ID}"
-                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

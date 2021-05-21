@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         Title="QQServer" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
         <TextBox x:Name="LogBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"
                  FontSize="20" IsReadOnly="True"></TextBox>
+        <Button Grid.Row="1" HorizontalAlignment="Right" Width="60" Height="35" Click="MessageManagementClick"
+                Margin="0,0,20,0" Content="消息管理"></Button>
     </Grid>
 </Window>

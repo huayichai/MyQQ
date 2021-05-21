@@ -1,4 +1,5 @@
 ﻿using Server.Entity;
+using Server.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,12 @@ namespace Server
             ServerSocket server = new ServerSocket();
             server.LogBox = LogBox;
             server.dispatcher = Dispatcher;
+        }
+
+        private void MessageManagementClick(object sender, RoutedEventArgs e)
+        {
+            ChatRecordWindow window = new ChatRecordWindow();
+            window.Show();
         }
     }
 }

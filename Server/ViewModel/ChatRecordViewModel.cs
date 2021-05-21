@@ -1,9 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Server.DAO;
 using Server.Entity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows;
 
 namespace Server.ViewModel
 {
@@ -12,7 +15,18 @@ namespace Server.ViewModel
         public ChatRecordViewModel()
         {
             messages = new ObservableCollection<Message>();
-            messages.Add(new Message() { fromName = "柴华溢", toName = "郭世祺", content = "加油", time = "20210521" });
+            DeleteCommand = new RelayCommand<string>((messageID) =>
+            {
+                foreach (Message m in messages)
+                {
+                    if (m.ID.Equals(messageID))
+                    {
+                        messages.Remove(m);
+                        break;
+                    }
+                }
+                MessageDAO.DeleteMessageByAccount(messageID);
+            });
         }
 
         private string searchText;
@@ -31,6 +45,7 @@ namespace Server.ViewModel
             set { messages = value; RaisePropertyChanged(); }
         }
 
+        public RelayCommand<string> DeleteCommand { get; set; }
 
     }
 }

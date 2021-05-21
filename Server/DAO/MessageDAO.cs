@@ -164,6 +164,7 @@ namespace Server.DAO
                     while (reader.Read())
                     {
                         Message m = new Message();
+                        m.ID = reader.GetString("messageID");
                         m.fromAccount = reader.GetString("realAccount");
                         m.toAccount = reader.GetString("to");
                         m.fromName = reader.GetString("u1Name");
@@ -181,5 +182,26 @@ namespace Server.DAO
             }
         }
     
+        public static bool DeleteMessageByAccount(string messageID)
+        {
+            using (MySqlConnection msc = new MySqlConnection(constring))
+            {
+                string sql = "delete " +
+                    "from message " +
+                    "where `messageID`=@messageID";
+                MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("messageID", messageID);
+                msc.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception e) 
+                {
+                    return false;
+                }
+            }
+        }
     }
 }
