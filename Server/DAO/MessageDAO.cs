@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Server.Entity;
 using Server.Router._Request;
 using Server.Router._Response;
 using System;
@@ -14,8 +15,9 @@ namespace Server.DAO
         {
             using (MySqlConnection msc = new MySqlConnection(constring))
             {
-                string sql = "insert into unread_message (`from`,`to`,`content`,`time`,`realAccount`) values (@from,@to,@content,@time,@realAccount)";
+                string sql = "insert into unread_message (`messageID`,`from`,`to`,`content`,`time`,`realAccount`) values (@ID,@from,@to,@content,@time,@realAccount)";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("messageID", IDUtil.GenerateMessageID());
                 cmd.Parameters.AddWithValue("from", request.from);
                 cmd.Parameters.AddWithValue("to", request.to);
                 cmd.Parameters.AddWithValue("content", request.content);
@@ -38,12 +40,13 @@ namespace Server.DAO
         {
             using (MySqlConnection msc = new MySqlConnection(constring))
             {
-                string sql = "insert into message (`from`,`to`,`content`,`time`,`realAccount`) values (@from,@to,@content,@time,@realAccount)";
+                string sql = "insert into message (`messageID`,`from`,`to`,`content`,`time`,`realAccount`) values (@ID,@from,@to,@content,@time,@realAccount)";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("ID", IDUtil.GenerateMessageID());
                 cmd.Parameters.AddWithValue("from", request.from);
                 cmd.Parameters.AddWithValue("to", request.to);
                 cmd.Parameters.AddWithValue("content", request.content);
-                cmd.Parameters.AddWithValue("time", request.time);
+                cmd.Parameters.AddWithValue("time", DateTime.Now);
                 cmd.Parameters.AddWithValue("realAccount", realAccount);
                 msc.Open();
                 try
@@ -142,5 +145,41 @@ namespace Server.DAO
                 }
             }
         }
+    
+        public static List<Message> SelectMessageByAccount(string account)
+        {
+            using (MySqlConnection msc = new MySqlConnection(constring))
+            {
+                string sql = "select message.*, u1.name u1Name, u2.name u2Name " +
+                    "from message,user u1, user u2 " +
+                    "where (message.`to`=@to or message.`from`=@from) and (message.`realAccount`=u1.`account`) and (message.`to`=u2.`account`)";
+                MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("to", account);
+                cmd.Parameters.AddWithValue("from", account);
+                msc.Open();
+                try
+                {
+                    List<Message> messages = new List<Message>();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Message m = new Message();
+                        m.fromAccount = reader.GetString("realAccount");
+                        m.toAccount = reader.GetString("to");
+                        m.fromName = reader.GetString("u1Name");
+                        m.toName = reader.GetString("u2Name");
+                        m.content = reader.GetString("content");
+                        m.SendTime = reader.GetDateTime("time");
+                        messages.Add(m);
+                    }
+                    return messages;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+        }
+    
     }
 }
