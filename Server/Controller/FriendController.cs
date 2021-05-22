@@ -44,14 +44,17 @@ namespace Server.Controller
 
         public static void AddFriendResponse(AddFriendResponse response)
         {
-            if (CenterController.clientMap.ContainsKey(response.friendAccount))
+            if (response.res)
             {
-                response.SetFriend(SearchFriend(response.userAccount));
-                Client client = CenterController.clientMap[response.friendAccount];
-                client.socket.Send(response.ToString());
+                if (CenterController.clientMap.ContainsKey(response.friendAccount))
+                {
+                    response.SetFriend(SearchFriend(response.userAccount));
+                    Client client = CenterController.clientMap[response.friendAccount];
+                    client.socket.Send(response.ToString());
+                }
+                UserDAO.InsertFriend(response.userAccount, response.friendAccount);
+                UserDAO.InsertFriend(response.friendAccount, response.userAccount);
             }
-            UserDAO.InsertFriend(response.userAccount, response.friendAccount);
-            UserDAO.InsertFriend(response.friendAccount, response.userAccount);
         }
     }
 }

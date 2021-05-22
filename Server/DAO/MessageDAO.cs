@@ -17,7 +17,7 @@ namespace Server.DAO
             {
                 string sql = "insert into unread_message (`messageID`,`from`,`to`,`content`,`time`,`realAccount`) values (@ID,@from,@to,@content,@time,@realAccount)";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
-                cmd.Parameters.AddWithValue("messageID", IDUtil.GenerateMessageID());
+                cmd.Parameters.AddWithValue("ID", IDUtil.GenerateMessageID());
                 cmd.Parameters.AddWithValue("from", request.from);
                 cmd.Parameters.AddWithValue("to", request.to);
                 cmd.Parameters.AddWithValue("content", request.content);
