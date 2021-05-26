@@ -130,8 +130,8 @@ namespace Server.DAO
                     while (reader.Read())
                     {
                         HistoryResponse response = new HistoryResponse();
-                        response.fromAccount = reader.GetString("from");
-                        response.toAccount = reader.GetString("to");
+                        response.fromAccount = fromAccount;
+                        response.toAccount = toAccount;
                         response.name = reader.GetString("name");
                         response.time = reader.GetDateTime("time");
                         response.isMy = fromAccount.Equals(reader.GetString("from"));

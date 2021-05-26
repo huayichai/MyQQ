@@ -14,7 +14,7 @@ namespace Server.Controller
 
             if (user != null)
             {
-                if (user.password.Equals(password))
+                if (user.isLock.Equals("解禁") && user.password.Equals(password))
                 {
                     return user;
                 } 

@@ -35,5 +35,11 @@ namespace Server
             ChatRecordWindow window = new ChatRecordWindow();
             window.Show();
         }
+
+        private void UserManageClick(object sender, RoutedEventArgs e)
+        {
+            ManageUser window = new ManageUser();
+            window.Show();
+        }
     }
 }

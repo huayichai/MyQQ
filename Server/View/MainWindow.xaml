@@ -13,7 +13,11 @@
         </Grid.RowDefinitions>
         <TextBox x:Name="LogBox" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"
                  FontSize="20" IsReadOnly="True"></TextBox>
-        <Button Grid.Row="1" HorizontalAlignment="Right" Width="60" Height="35" Click="MessageManagementClick"
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button HorizontalAlignment="Right" Margin="0,0,20,0" Width="60" Height="35" Content="用户管理"
+                    Click="UserManageClick"></Button>
+            <Button  HorizontalAlignment="Right" Width="60" Height="35" Click="MessageManagementClick"
                 Margin="0,0,20,0" Content="消息管理"></Button>
+        </StackPanel>
     </Grid>
 </Window>

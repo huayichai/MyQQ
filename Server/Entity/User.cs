@@ -11,6 +11,7 @@ namespace Server.Entity
         public string name { get; set; }
         public string password { get; set; }
 
+        public string isLock { get; set; }
         public string header { get; set; }
         public string introduction { get; set; }
 

@@ -27,6 +27,7 @@ namespace Server.DAO
                         user.name = reader.GetString("name");
                         user.header = reader.GetString("header");
                         user.introduction = reader.GetString("introduction");
+                        user.isLock = reader.GetString("isLock");
                         return user;
                     }
                     return null;
@@ -151,6 +152,57 @@ namespace Server.DAO
                 catch (Exception)
                 {
                     return null;
+                }
+            }
+        }
+    
+        public static List<User> SelectAllUser()
+        {
+            using (MySqlConnection msc = new MySqlConnection(constring))
+            {
+                string sql = "select * from user";
+                MySqlCommand cmd = new MySqlCommand(sql, msc);
+                msc.Open();
+                try
+                {
+                    List<User> users = new List<User>();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        User user = new User();
+                        user.account = reader.GetString("account");
+                        user.name = reader.GetString("name");
+                        user.header = reader.GetString("header");
+                        user.introduction = reader.GetString("introduction");
+                        user.isLock = reader.GetString("isLock");
+                        users.Add(user);
+                    }
+                    return users;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
+    
+        public static bool UpdateUserIsLock(string account, string isLock)
+        {
+            using (MySqlConnection msc = new MySqlConnection(constring))
+            {
+                string sql = "update user set isLock=@isLock where account=@account";
+                MySqlCommand cmd = new MySqlCommand(sql, msc);
+                cmd.Parameters.AddWithValue("isLock", isLock);
+                cmd.Parameters.AddWithValue("account", account);
+                msc.Open();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
                 }
             }
         }
