@@ -113,9 +113,10 @@ namespace Server.DAO
         {
             using (MySqlConnection msc = new MySqlConnection(constring))
             {
-                string sql = "select message.from,message.time,message.content,user.name " +
+                string sql = "select message.from,message.to,message.time,message.content,user.name " +
                     "from message,user" +
-                    " where ((message.`to`=@to1 and message.`from`=@from1) or (message.`to`=@to2 and message.`from`=@from2)) and (message.`realAccount`=user.`account`)";
+                    " where ((message.`to`=@to1 and message.`from`=@from1) or (message.`to`=@to2 and message.`from`=@from2)) and (message.`realAccount`=user.`account`) " +
+                    "order by message.time";
                 MySqlCommand cmd = new MySqlCommand(sql, msc);
                 cmd.Parameters.AddWithValue("to1", fromAccount);
                 cmd.Parameters.AddWithValue("from1", toAccount);
@@ -129,8 +130,8 @@ namespace Server.DAO
                     while (reader.Read())
                     {
                         HistoryResponse response = new HistoryResponse();
-                        response.fromAccount = fromAccount;
-                        response.toAccount = toAccount;
+                        response.fromAccount = reader.GetString("from");
+                        response.toAccount = reader.GetString("to");
                         response.name = reader.GetString("name");
                         response.time = reader.GetDateTime("time");
                         response.isMy = fromAccount.Equals(reader.GetString("from"));
