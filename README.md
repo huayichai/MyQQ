@@ -38,7 +38,7 @@
 
 - QQ客户端之间、WeChat网页端之间、客户端和网页端之间的聊天信息均通过Server中转
 - Server多线程处理多个用户的数据请求
-
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/UseCase.png)
 
 
 ## 使用方式
@@ -56,15 +56,39 @@
 
 ## 展示
 
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/login.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/FriendWindow.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/ChatWindow.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/AddFriendWindow.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/HistoryWindow.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/WeChatLogin.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/WeChatFriend.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/WeChatChat.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/ServerMainWindow.png)
+
+
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/ChatManagement.png)
 
 
 
+> **友情提示：南航的同学使用该项目请慎重！！！**（特别是：**计算机网络实验+现代软件开发方法 **这两门）
 
 
 
-
-
-
-
-> **友情提示：南航的同学使用该项目请慎重！！！**（特别是：**计算机网络实验+现代软件开发方法 **这两门课）
-
+![image](https://github.com/huayichai/MyQQ/blob/master/Report/img/do%20not%20copy.png)
